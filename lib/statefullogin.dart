@@ -103,7 +103,10 @@ class _Login2State extends State<Login2> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
-                      minimumSize: Size(100, 35)),
+                      minimumSize: Size(100, 35),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      )),
                   onPressed: () {
                     final valid = formkey.currentState!.validate();
                     if (valid) {
