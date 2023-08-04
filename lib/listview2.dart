@@ -10,16 +10,16 @@ void main() {
 
 class Listview2 extends StatelessWidget {
   var name = [
-    "football",
-    "cricket",
-    "tennis",
-    "jersey",
-    "shorts",
-    "boots",
+    "nivea football",
+    "cricket Bat",
+    "tennis Bat",
+    "Brazil team jersey",
+    "4in1 compbo shorts",
+    "Addidas boots",
     "cricket ball",
-    "socks",
-    "cap",
-    "gloves",
+    "Captian socks",
+    "black cap",
+    "Adidas gloves",
   ];
   var images = [
     "https://rukminim2.flixcart.com/image/832/832/xif0q/ball/r/j/t/400-country-colour-england-5-22-1-1360eg-football-nivia-original-imaghjk2hgfykugg.jpeg?q=70",
@@ -54,7 +54,7 @@ class Listview2 extends StatelessWidget {
         title: Column(
           children: [
             Text(
-              "NJR SPORTS",
+              "HOOLIE SPORTS",
               style: TextStyle(
                 color: Colors.green[900],
                 fontSize: 35,
@@ -62,7 +62,7 @@ class Listview2 extends StatelessWidget {
               ),
             ),
             Text(
-              "mmade kada...",
+              "mmade kada... vera vanga pova",
               style: GoogleFonts.satisfy(
                 color: Colors.black,
                 fontSize: 20,
