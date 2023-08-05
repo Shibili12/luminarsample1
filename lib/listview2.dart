@@ -109,7 +109,7 @@ class Listview2 extends StatelessWidget {
                 style: GoogleFonts.robotoSerif(fontWeight: FontWeight.bold),
               ),
               subtitle: Text("\$ ${price[index]}"),
-              trailing: Wrap(
+              trailing: const Wrap(
                 children: [
                   Icon(
                     Icons.favorite_border,
