@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/widgets.dart';
@@ -36,6 +38,14 @@ class Stackexample extends StatelessWidget {
                   "assets/images/chip.png",
                   height: 100,
                   width: 100,
+                ),
+                Transform.rotate(
+                  angle: 90 * pi / 180,
+                  child: Icon(
+                    Icons.wifi,
+                    size: 40,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
