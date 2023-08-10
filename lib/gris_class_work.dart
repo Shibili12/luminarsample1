@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -40,6 +41,19 @@ class Gridclasswork extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: Image(
+          image: AssetImage('assets/images/bghooliee.jpg'),
+          fit: BoxFit.cover,
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text(
+          "Grid View",
+          style: GoogleFonts.satisfy(color: Colors.yellow[900], fontSize: 45),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
