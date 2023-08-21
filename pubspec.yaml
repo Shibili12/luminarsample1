@@ -37,8 +37,9 @@ dependencies:
   fluttertoast: ^8.2.2
   font_awesome_flutter: ^10.5.0
   google_fonts: ^5.1.0
+  introduction_screen: ^3.1.11
   lottie: ^2.6.0
-  rive: ^0.11.14
+  # rive: ^0.11.14
   webview_flutter: ^4.2.2
 
 dev_dependencies:
