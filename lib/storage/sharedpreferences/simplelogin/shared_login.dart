@@ -2,15 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:luminarsample1/storage/sharedpreferences/simplelogin/shared_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Sharedlogin(),
-    ),
-  );
-}
-
 class Sharedlogin extends StatefulWidget {
   const Sharedlogin({super.key});
 
@@ -90,26 +81,41 @@ class _SharedloginState extends State<Sharedlogin> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15))),
                 onPressed: () async {
-                  //object of sharedpreference
                   preferences = await SharedPreferences.getInstance();
-
-                  //to store datas to a variable from controller
                   String uname = user.text;
                   String pass = pwd.text;
+                  String username2 = preferences.getString("username")!;
+                  String password2 = preferences.getString("password")!;
+                  // print(username2);
 
-                  if (uname != "" && pass != "") {
-                    //to store data from variable to sharedpreference using object
-                    preferences.setString("username", uname);
-                    preferences.setString("password", pass);
-                    //set the user login
-                    preferences.setBool("newuser", false);
-
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: ((context) => Sharedhome()),
-                      ),
-                    );
+                  if (uname == username2 && pass == password2) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: ((context) => Sharedhome())));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Enter valid username and password")));
                   }
+
+                  //object of sharedpreference
+                  // preferences = await SharedPreferences.getInstance();
+
+                  // //to store datas to a variable from controller
+                  // String uname = user.text;
+                  // String pass = pwd.text;
+
+                  // if (uname != "" && pass != "") {
+                  //   //to store data from variable to sharedpreference using object
+                  //   preferences.setString("username", uname);
+                  //   preferences.setString("password", pass);
+                  //   //set the user login
+                  //   preferences.setBool("newuser", false);
+
+                  //   Navigator.of(context).push(
+                  //     MaterialPageRoute(
+                  //       builder: ((context) => Sharedhome()),
+                  //     ),
+                  //   );
+                  // }
                   //to clear texts in the textfield
                   user.text = "";
                   pwd.text = "";
@@ -122,4 +128,21 @@ class _SharedloginState extends State<Sharedlogin> {
       ),
     );
   }
+
+  // void checlogin() async {
+  //   preferences = await SharedPreferences.getInstance();
+  //   String uname = user.text;
+  //   String pass = pwd.text;
+  //   String username2 = preferences.getString("username")!;
+  //   String password2 = preferences.getString("password")!;
+  //   // print(username2);
+
+  //   if (uname == username2 && pass == password2) {
+  //     Navigator.of(context)
+  //         .push(MaterialPageRoute(builder: ((context) => Sharedhome())));
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text("Enter valid username and password")));
+  //   }
+  // }
 }
