@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:luminarsample1/mediaquery/home.dart';
 import 'package:luminarsample1/storage/sqflite_curd/loginregistration/registrationpage.dart';
 import 'package:luminarsample1/storage/sqflite_curd/loginregistration/sqlhelper.dart';
 
@@ -12,6 +13,7 @@ class Loginpagesqf extends StatefulWidget {
 class _LoginpagesqfState extends State<Loginpagesqf> {
   final usercontroller = TextEditingController();
   final passcontroller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,8 +55,8 @@ class _LoginpagesqfState extends State<Loginpagesqf> {
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15))),
-                onPressed: () async {
-                  await readUser();
+                onPressed: () {
+                  logincheck(usercontroller.text, passcontroller.text);
                 },
                 child: Text("login"),
               ),
@@ -77,7 +79,15 @@ class _LoginpagesqfState extends State<Loginpagesqf> {
     );
   }
 
-  Future<void> readUser() async {
-    await Sqlhelper2.read_user();
+  void logincheck(String username, String password) async {
+    var data = await Sqlhelper2.checklogin(username, password);
+    if (data.isNotEmpty) {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: ((context) => HomePage())));
+      print("login success");
+    } else if (data.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Loginfailed")));
+    }
   }
 }

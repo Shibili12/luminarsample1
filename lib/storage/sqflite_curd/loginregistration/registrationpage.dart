@@ -72,9 +72,15 @@ class _RegistrationpageState extends State<Registrationpage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15))),
                 onPressed: () async {
-                  await createUser();
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Loginpagesqf()));
+                  if (namecontroller.text != "" &&
+                      usernamecontroller.text != "" &&
+                      passwordcontroller.text != "") {
+                    await createUser(namecontroller.text,
+                        usernamecontroller.text, passwordcontroller.text);
+
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Loginpagesqf()));
+                  }
                 },
                 child: Text("Sign up"),
               ),
@@ -97,9 +103,8 @@ class _RegistrationpageState extends State<Registrationpage> {
     );
   }
 
-  Future<void> createUser() async {
-    await Sqlhelper2.create_user(
-        namecontroller.text, usernamecontroller.text, passwordcontroller.text);
+  Future<void> createUser(String name, String username, String password) async {
+    await Sqlhelper2.create_user(name, username, password);
     print("succsess");
   }
 }

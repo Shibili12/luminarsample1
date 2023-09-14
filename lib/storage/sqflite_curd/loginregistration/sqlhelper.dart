@@ -26,8 +26,14 @@ class Sqlhelper2 {
     return id;
   }
 
-  static Future<List<Map<String, dynamic>>> read_user() async {
+  static Future<List<Map>> checklogin(String username, String password) async {
     final db = await Sqlhelper2.createDB();
-    return db.query('users', orderBy: 'id');
+    final data = await db.rawQuery(
+        "SELECT * FROM users WHERE uname= '$username' AND pass = '$password' ");
+    print(data.toString());
+    if (data.isNotEmpty) {
+      return data;
+    }
+    return data;
   }
 }
