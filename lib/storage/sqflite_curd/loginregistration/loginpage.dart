@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:luminarsample1/mediaquery/home.dart';
+import 'package:luminarsample1/storage/sqflite_curd/loginregistration/adminpage.dart';
+import 'package:luminarsample1/storage/sqflite_curd/loginregistration/homepage.dart';
 import 'package:luminarsample1/storage/sqflite_curd/loginregistration/registrationpage.dart';
 import 'package:luminarsample1/storage/sqflite_curd/loginregistration/sqlhelper.dart';
 
@@ -13,6 +17,8 @@ class Loginpagesqf extends StatefulWidget {
 class _LoginpagesqfState extends State<Loginpagesqf> {
   final usercontroller = TextEditingController();
   final passcontroller = TextEditingController();
+  String admin = "admin";
+  String adminpassword = "admin";
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +30,7 @@ class _LoginpagesqfState extends State<Loginpagesqf> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
+                controller: usercontroller,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
@@ -37,6 +44,7 @@ class _LoginpagesqfState extends State<Loginpagesqf> {
                 height: 20,
               ),
               TextFormField(
+                controller: passcontroller,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
@@ -56,7 +64,13 @@ class _LoginpagesqfState extends State<Loginpagesqf> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15))),
                 onPressed: () {
-                  logincheck(usercontroller.text, passcontroller.text);
+                  if (usercontroller.text == admin &&
+                      passcontroller.text == adminpassword) {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: ((context) => Adminpage())));
+                  } else {
+                    logincheck(usercontroller.text, passcontroller.text);
+                  }
                 },
                 child: Text("login"),
               ),
@@ -81,9 +95,10 @@ class _LoginpagesqfState extends State<Loginpagesqf> {
 
   void logincheck(String username, String password) async {
     var data = await Sqlhelper2.checklogin(username, password);
+
     if (data.isNotEmpty) {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: ((context) => HomePage())));
+          MaterialPageRoute(builder: ((context) => Homepagesqf())));
       print("login success");
     } else if (data.isEmpty) {
       ScaffoldMessenger.of(context)

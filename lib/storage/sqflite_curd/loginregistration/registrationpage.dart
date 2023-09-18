@@ -77,9 +77,6 @@ class _RegistrationpageState extends State<Registrationpage> {
                       passwordcontroller.text != "") {
                     await createUser(namecontroller.text,
                         usernamecontroller.text, passwordcontroller.text);
-
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Loginpagesqf()));
                   }
                 },
                 child: Text("Sign up"),
@@ -104,7 +101,14 @@ class _RegistrationpageState extends State<Registrationpage> {
   }
 
   Future<void> createUser(String name, String username, String password) async {
-    await Sqlhelper2.create_user(name, username, password);
-    print("succsess");
+    final id = await Sqlhelper2.create_user(name, username, password);
+    print(id);
+    if (id != null) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Loginpagesqf()));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("enter correct details")));
+    }
   }
 }

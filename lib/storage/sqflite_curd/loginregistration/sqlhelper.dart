@@ -2,7 +2,7 @@ import 'package:sqflite/sqflite.dart' as sql;
 
 class Sqlhelper2 {
   static Future<sql.Database> createDB() async {
-    return sql.openDatabase('users.db', version: 1,
+    return sql.openDatabase('myusers.db', version: 1,
         onCreate: (sql.Database database, int version) async {
       await createTable(database);
     });
@@ -26,14 +26,23 @@ class Sqlhelper2 {
     return id;
   }
 
-  static Future<List<Map>> checklogin(String username, String password) async {
+  static Future<List<Map>> checklogin(String user, String pass) async {
     final db = await Sqlhelper2.createDB();
+    print(user.toString());
     final data = await db.rawQuery(
-        "SELECT * FROM users WHERE uname= '$username' AND pass = '$password' ");
+        "SELECT * FROM users WHERE uname = '$user' AND pass = '$pass'");
     print(data.toString());
     if (data.isNotEmpty) {
       return data;
     }
     return data;
   }
+
+  static Future<List<Map<String, dynamic>>> getAll() async {
+    final db = await Sqlhelper2.createDB();
+    final data = db.rawQuery("SELECT * FROM users");
+    return data;
+  }
+
+  static deleteuser() {}
 }
