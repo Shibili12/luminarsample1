@@ -25,7 +25,7 @@ class _AdminpageState extends State<Adminpage> {
   }
 
   void delete(int id) async {
-    await Sqlhelper2.deleteuser();
+    await Sqlhelper2.deleteuser(id);
   }
 
   @override
@@ -39,19 +39,11 @@ class _AdminpageState extends State<Adminpage> {
                 child: ListTile(
                   title: Text('${data[index]['name']}'),
                   subtitle: Text('${data[index]['uname']}'),
-                  trailing: Wrap(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.edit),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          delete(data[index]['id']);
-                        },
-                        icon: Icon(Icons.delete),
-                      ),
-                    ],
+                  trailing: IconButton(
+                    onPressed: () {
+                      delete(data[index]['id']);
+                    },
+                    icon: Icon(Icons.delete),
                   ),
                 ),
               )),
