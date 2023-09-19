@@ -44,5 +44,13 @@ class Sqlhelper2 {
     return data;
   }
 
-  static deleteuser() {}
+  static Future<void> deleteuser(int id)async {
+    final db = await Sqlhelper2.createDB();
+    try {
+      await db.delete('users', where: 'id=?', whereArgs: [id]);
+    } catch (e) {
+      throw Exception();
+    }
+  
+  }
 }

@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:luminarsample1/mediaquery/home.dart';
-import 'package:luminarsample1/storage/sqflite_curd/loginregistration/adminpage.dart';
-import 'package:luminarsample1/storage/sqflite_curd/loginregistration/homepage.dart';
-import 'package:luminarsample1/storage/sqflite_curd/loginregistration/registrationpage.dart';
-import 'package:luminarsample1/storage/sqflite_curd/loginregistration/sqlhelper.dart';
+import 'package:luminarsample1/storage/sqflite_crud/loginregistration/adminpage.dart';
+import 'package:luminarsample1/storage/sqflite_crud/loginregistration/homepage.dart';
+import 'package:luminarsample1/storage/sqflite_crud/loginregistration/registrationpage.dart';
+import 'package:luminarsample1/storage/sqflite_crud/loginregistration/sqlhelper.dart';
 
 class Loginpagesqf extends StatefulWidget {
   const Loginpagesqf({super.key});

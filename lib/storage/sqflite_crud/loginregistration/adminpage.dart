@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:luminarsample1/storage/sqflite_curd/loginregistration/sqlhelper.dart';
+import 'package:luminarsample1/storage/sqflite_crud/loginregistration/sqlhelper.dart';
 
 class Adminpage extends StatefulWidget {
   const Adminpage({super.key});

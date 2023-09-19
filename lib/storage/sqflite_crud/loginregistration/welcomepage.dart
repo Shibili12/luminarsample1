@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:luminarsample1/storage/sqflite_curd/loginregistration/loginpage.dart';
-import 'package:luminarsample1/storage/sqflite_curd/loginregistration/registrationpage.dart';
+import 'package:luminarsample1/storage/sqflite_crud/loginregistration/loginpage.dart';
+import 'package:luminarsample1/storage/sqflite_crud/loginregistration/registrationpage.dart';
 
 void main() {
   runApp(MaterialApp(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:luminarsample1/storage/sqflite_curd/contacts/sqloperations.dart';
+import 'package:luminarsample1/storage/sqflite_crud/contacts/sqloperations.dart';
 
 void main() {
   runApp(MaterialApp(
