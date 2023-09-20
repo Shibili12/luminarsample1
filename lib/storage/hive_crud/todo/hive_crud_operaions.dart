@@ -53,9 +53,15 @@ class _Hive_crudState extends State<Hive_crud> {
                     trailing: Wrap(
                       children: [
                         IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.edit)),
+                            onPressed: () {
+                              showTask(context, task[index]['id']);
+                            },
+                            icon: const Icon(Icons.edit)),
                         IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.delete)),
+                            onPressed: () {
+                              deleteTask(task[index]['id']);
+                            },
+                            icon: const Icon(Icons.delete)),
                       ],
                     ),
                   ),
@@ -71,6 +77,12 @@ class _Hive_crudState extends State<Hive_crud> {
   }
 
   showTask(BuildContext context, int? itemkey) {
+    if (itemkey != null) {
+      final existingtask =
+          task.firstWhere((element) => element['id'] == itemkey);
+      taskcontroller.text = existingtask['taskname'];
+      contentcontroller.text = existingtask['taskcontent'];
+    }
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -139,7 +151,10 @@ class _Hive_crudState extends State<Hive_crud> {
     loadTask();
   }
 
-  void updateTask(int? itemkey, Map<String, dynamic> task) {}
+  Future<void> updateTask(int? itemkey, Map<String, dynamic> updatetask) async {
+    await mybox.put(itemkey, updatetask);
+    loadTask();
+  }
 
   //to read datas from hive
   void loadTask() {
@@ -155,5 +170,12 @@ class _Hive_crudState extends State<Hive_crud> {
     setState(() {
       task = task_from_hive.reversed.toList();
     });
+  }
+
+  Future<void> deleteTask(int itemkey) async {
+    await mybox.delete(itemkey);
+    loadTask();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Successfull")));
   }
 }
