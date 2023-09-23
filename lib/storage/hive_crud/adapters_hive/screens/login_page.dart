@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:luminarsample1/storage/hive_crud/adapters_hive/database/hivedb.dart';
 import 'package:luminarsample1/storage/hive_crud/adapters_hive/models/usermodel.dart';
+import 'package:luminarsample1/storage/hive_crud/adapters_hive/screens/home_page.dart';
 import 'package:luminarsample1/storage/hive_crud/adapters_hive/screens/registration.dart';
 
 void main() async {
@@ -60,7 +62,10 @@ class Loginhive extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[900],
               ),
-              onPressed: () {},
+              onPressed: () async {
+                final userlist = await HiveDb.instance.getuser();
+                checkLogin(context, userlist);
+              },
               child: Text("login"),
             ),
             TextButton(
@@ -76,5 +81,22 @@ class Loginhive extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void checkLogin(BuildContext context, List<User> userlist) async {
+    final loginuser = usernamecontroller.text.trim();
+    final loginpass = passwordcontroller.text.trim();
+    if (loginuser != "" && loginpass != "") {
+      await Future.forEach(userlist, (singleuser) {
+        if (singleuser.username == loginuser &&
+            singleuser.password == loginpass) {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: ((context) => Homepagehive())));
+        } else {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text("username is not correct")));
+        }
+      });
+    }
   }
 }

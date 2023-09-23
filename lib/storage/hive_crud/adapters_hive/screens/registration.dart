@@ -65,6 +65,12 @@ class Regidtrationhive extends StatelessWidget {
             },
             child: Text("Register"),
           ),
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: ((context) => Loginhive())));
+              },
+              child: Text("already have account?login")),
         ],
       ),
     );
