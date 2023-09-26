@@ -5,16 +5,16 @@ import 'package:luminarsample1/storage/hive_crud/adapters_hive/models/usermodel.
 import 'package:luminarsample1/storage/hive_crud/adapters_hive/screens/home_page.dart';
 import 'package:luminarsample1/storage/hive_crud/adapters_hive/screens/registration.dart';
 
-void main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized(); //to connnet widget tree to flutter engine
-  await Hive.initFlutter(); //to initialize hive in flutter
-  // Hive.registerAdapter();
-  await Hive.openBox<User>('userdata');
-  runApp(MaterialApp(
-    home: Loginhive(),
-  ));
-}
+// void main() async {
+//   WidgetsFlutterBinding
+//       .ensureInitialized(); //to connnet widget tree to flutter engine
+//   await Hive.initFlutter(); //to initialize hive in flutter
+//   // Hive.registerAdapter();
+//   await Hive.openBox<User>('userdata');
+//   runApp(MaterialApp(
+//     home: Loginhive(),
+//   ));
+// }
 
 class Loginhive extends StatelessWidget {
   Loginhive({super.key});
@@ -86,12 +86,20 @@ class Loginhive extends StatelessWidget {
   void checkLogin(BuildContext context, List<User> userlist) async {
     final loginuser = usernamecontroller.text.trim();
     final loginpass = passwordcontroller.text.trim();
+    bool userfound = false;
     if (loginuser != "" && loginpass != "") {
       await Future.forEach(userlist, (singleuser) {
         if (singleuser.username == loginuser &&
             singleuser.password == loginpass) {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: ((context) => Homepagehive())));
+          userfound = true;
+        } else {
+          userfound = false;
+        }
+        if (userfound == true) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: ((context) => Homepagehive(email: loginuser))));
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text("Login success")));
         } else {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text("username is not correct")));

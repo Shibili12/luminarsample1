@@ -43,6 +43,7 @@ dependencies:
   google_maps_flutter: ^2.5.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  http: ^1.1.0
   introduction_screen: ^3.1.11
   loader_overlay: ^2.3.1
   loading_animation_widget: ^1.2.0+4

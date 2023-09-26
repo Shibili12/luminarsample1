@@ -2,12 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Homepagehive extends StatelessWidget {
-  const Homepagehive({super.key});
+  String? email;
+  Homepagehive({
+    this.email,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("success")),
+      backgroundColor: Colors.yellow,
+      body: Center(
+          child: Text(
+        "Welcome $email",
+        style: TextStyle(
+          fontSize: 23,
+          fontWeight: FontWeight.bold,
+        ),
+      )),
     );
   }
 }
