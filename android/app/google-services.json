@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "604745732119",
+    "project_id": "newproject1-ab48d",
+    "storage_bucket": "newproject1-ab48d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604745732119:android:b60570c6749a79b3128c52",
+        "android_client_info": {
+          "package_name": "com.example.luminarsample1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNtrNiPcykVO9Ww0DdELenf_NcOFsuguA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

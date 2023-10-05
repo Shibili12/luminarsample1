@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:luminarsample1/API%20integration/api%20integration%20using%20dio/controller/datacontroller.dart';
