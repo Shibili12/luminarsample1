@@ -36,6 +36,37 @@ class _FirestorageState extends State<Firestorage> {
                 ),
               ],
             ),
+            Expanded(
+              child: FutureBuilder(
+                future: loadMedia(),
+                builder: ((context,
+                    AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return ListView.builder(
+                      itemCount: snapshot.data?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        final Map<String, dynamic> image =
+                            snapshot.data![index];
+                        return Card(
+                          child: ListTile(
+                            leading: Image.network(image['imageurl']),
+                            title: Text(image['uploadedby']),
+                            subtitle: Text(image['description']),
+                            trailing: IconButton(
+                              onPressed: () => deleteMedia(image['path']),
+                              icon: Icon(Icons.delete),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }),
+              ),
+            ),
           ],
         ),
       ),
@@ -56,6 +87,7 @@ class _FirestorageState extends State<Firestorage> {
         await storage.ref(filename).putFile(
             imagefile,
             SettableMetadata(customMetadata: {
+              //meta data
               'uploadedby': 'its me',
               'description': 'some description',
             }));
@@ -66,5 +98,27 @@ class _FirestorageState extends State<Firestorage> {
     } on FirebaseException catch (e) {
       print(e);
     }
+  }
+
+  Future<List<Map<String, dynamic>>> loadMedia() async {
+    List<Map<String, dynamic>> images = [];
+    final ListResult result = await storage.ref().list();
+    final List<Reference> allfiles = result.items;
+    await Future.forEach(allfiles, (singlefile) async {
+      final String url = await singlefile.getDownloadURL();
+      final FullMetadata metadata = await singlefile.getMetadata();
+      images.add({
+        'imageurl': url,
+        'path': singlefile.fullPath,
+        'uploadedby': metadata.customMetadata?['uploadedby'] ?? 'Nodata',
+        'description': metadata.customMetadata?['description'] ?? 'nodata',
+      });
+    });
+    return images;
+  }
+
+  Future<void> deleteMedia(String imagepath) async {
+    await storage.ref(imagepath).delete();
+    setState(() {});
   }
 }
