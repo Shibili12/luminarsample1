@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:luminarsample1/statemangement_provider/provider/movieprovider.dart';
+import 'package:luminarsample1/statemangement_provider/view/wishlistpage.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -24,7 +25,10 @@ class Moviemainpage extends StatelessWidget {
         title: Text("Movies"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => Wishlistscreen()));
+            },
             icon: Icon(Icons.favorite),
           ),
         ],
