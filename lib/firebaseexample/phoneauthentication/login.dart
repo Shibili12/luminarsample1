@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:luminarsample1/firebaseexample/phoneauthentication/home.dart';
 
 class Loginphoneauth extends StatefulWidget {
@@ -25,18 +26,31 @@ class _LoginphoneauthState extends State<Loginphoneauth> {
         margin: EdgeInsets.all(4),
         child: Column(
           children: [
-            TextField(
+            IntlPhoneField(
               controller: phoneController,
               decoration: InputDecoration(
-                hintText: 'Phone Number',
-                prefix: Padding(
-                  padding: EdgeInsets.all(4),
-                  child: Text('+91'),
+                labelText: 'Phone Number',
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(),
                 ),
               ),
-              maxLength: 10,
-              keyboardType: TextInputType.phone,
+              initialCountryCode: 'IN',
+              onChanged: (phone) {
+                print(phone.completeNumber);
+              },
             ),
+            // TextField(
+            //   controller: phoneController,
+            //   decoration: InputDecoration(
+            //     hintText: 'Phone Number',
+            //     prefix: Padding(
+            //       padding: EdgeInsets.all(4),
+            //       child: Text('+91'),
+            //     ),
+            //   ),
+            //   maxLength: 10,
+            //   keyboardType: TextInputType.phone,
+            // ),
             Visibility(
               child: TextField(
                 controller: otpController,
@@ -80,7 +94,7 @@ class _LoginphoneauthState extends State<Loginphoneauth> {
 
   void loginWithPhone() async {
     auth.verifyPhoneNumber(
-      phoneNumber: "+91" + phoneController.text,
+      phoneNumber: phoneController.text,
       verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
         await auth.signInWithCredential(phoneAuthCredential).then((value) {
           print("you logged in successfully");

@@ -65,6 +65,7 @@ dependencies:
   path: ^1.8.3
   permission_handler: ^11.0.1
   provider: ^6.0.5
+  intl_phone_field: ^3.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
